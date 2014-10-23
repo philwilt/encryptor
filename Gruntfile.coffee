@@ -1,5 +1,4 @@
 module.exports = (grunt) ->
-  remapify = require 'remapify'
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-browserify')
 
@@ -16,7 +15,6 @@ module.exports = (grunt) ->
           debug: true
           alias: ['./js/encryptor.coffee:encryptor']
           transform: ['coffeeify']
-
 
     watch:
       coffee:
