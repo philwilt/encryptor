@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Encryptor!!!</title>
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+    <script type="text/javascript" src="node_modules/mocha/mocha.js"></script>
+    <script type="text/javascript" src="node_modules/chai/chai.js"></script>
+    <script>
+      mocha.setup('bdd');
+    </script>
+  </head>
+  <body>
+  <div id="mocha"></div>
+  <div id="messages"></div>
+  <div id="fixtures"></div>
+    <script src="build/testBundle.js"></script>
+      <script>
+        mocha.run();
+    </script>
+
+  </body>
+</html>
