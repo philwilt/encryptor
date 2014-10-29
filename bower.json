@@ -1,0 +1,7 @@
+{
+  "name": "encryptor",
+  "description": "A way to encrypt and send messages.",
+  "dependencies": {
+    "jquery": "~2.1.1"
+  }
+}
