@@ -1,21 +1,47 @@
-class Encryptor
-  setMessage: () ->
+jQuery ($) ->
+  Encryptor =
+    init: () ->
+      if @parseMessageFromUrl()
+        $('#encryptor').hide()
+        @decrypt()
+      else
+        $('#decryptor').hide()
+        @bindEvents()
 
-  getPassword: () ->
+    bindEvents: () ->
+      $('#encrypt').on "click", @protect.bind(this)
 
-  setUrl: () ->
+    setMessage: () ->
+      @message = $('#message').val()
 
-  replaceMessageWithUrl: () ->
+    getCypher: () ->
+      @parseQuery()['message']
 
-  encrypt: () ->
-    cypher = CryptoJS.AES.encrypt(@message, @password)
-    console.log "Verified: " + CryptoJS.AES.decrypt(cypher, @password).toString(CryptoJS.enc.Utf8)
-    cypher
+    getPassword: () ->
+      @password = prompt "Enter your password"
 
-  protect: () ->
-    @setMessage()
-    @getPassword()
-    @setUrl()
-    @replaceMessageWithUrl()
+    setUrl: () ->
+      @url = window.location + '?message=' + @encrypt()
 
-exports.Encryptor = Encryptor
+    replaceMessageWithUrl: () ->
+      window.location = @url
+
+    encrypt: () ->
+      cypher = CryptoJS.AES.encrypt(@message, @password)
+      cypher
+
+    decrypt: () ->
+      @getPassword()
+      $('#decrypted-message').text(CryptoJS.AES.decrypt(@cypher, @password).toString(CryptoJS.enc.Utf8))
+
+    protect: () ->
+      @setMessage()
+      @getPassword()
+      @setUrl()
+      @replaceMessageWithUrl()
+
+    parseMessageFromUrl: () ->
+      @cypher = document.URL.split("?message=")[1]
+
+  Encryptor.init()
+
